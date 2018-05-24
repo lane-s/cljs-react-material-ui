@@ -1,0 +1,2 @@
+### Local use of snapshot builds
+make will install this project's current code as a dependency in your local repository

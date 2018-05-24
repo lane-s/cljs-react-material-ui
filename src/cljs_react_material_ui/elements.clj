@@ -1,76 +1,109 @@
 (ns cljs-react-material-ui.elements
-  (:require [cljs-react-material-ui.core :as m]))
+  (:require [cljs-react-material-ui.core :as m])
+  (:import (javax.swing ButtonModel)
+           (java.lang.invoke SwitchPoint)))
 
 ; export (\w*) .*
 ; $1
 (def tags
   '[
     AppBar
-    AutoComplete
     Avatar
+    Backdrop
     Badge
     BottomNavigation
     BottomNavigationItem
+    Button
+    ButtonBase
     Card
     CardActions
+    CardContent
     CardHeader
     CardMedia
-    CardTitle
-    CardText
     Checkbox
     Chip
     CircularProgress
-    DatePicker
+    ClickAwayListener
+    Collapse
+    CssBaseline
     Dialog
+    DialogActions
+    DialogContent
+    DialogContentText
+    DialogTitle
     Divider
     Drawer
-    DropDownMenu
-    FlatButton
-    FloatingActionButton
-    FontIcon
+    ExpansionPanel
+    ExpansionPanelActions
+    ExpansionPanelDetails
+    ExpansionPanelSummary
+    Fade
+    FormControl
+    FormControlLabel
+    FormGroup
+    FormHelperText
+    FormLabel
+    Grid
     GridList
-    GridTile
+    GridListTile
+    GridListTileBar
+    Grow
+    Hidden
+    Icon
     IconButton
-    IconMenu
+    Input
+    InputAdornment
+    InputLabel
     LinearProgress
     List
     ListItem
-    makeSelectable
+    ListItemAvatar
+    ListItemIcon
+    ListItemSecondaryAction
+    ListItemText
+    ListSubheader
     Menu
     MenuItem
+    MenuList
+    MobileStepper
+    Modal
     MuiThemeProvider
     Paper
     Popover
-    RadioButton
-    RadioButtonGroup
-    RaisedButton
-    RefreshIndicator
-    SelectField
-    Slider
-    Subheader
-    SvgIcon
+    Portal
+    Radio
+    RadioGroup
+    RootRef
+    Select
+    Slide
+    Snackbar
+    SnackbarContent
     Step
     StepButton
     StepContent
+    StepIcon
     StepLabel
     Stepper
-    Snackbar
-    Tabs
+    SvgIcon
+    SwipeableDrawer
+    Switch
+    SwitchBase
     Tab
     Table
     TableBody
+    TableCell
     TableFooter
-    TableHeader
-    TableHeaderColumn
+    TableHead
+    TablePagination
     TableRow
-    TableRowColumn
+    TableSortLabel
+    Tabs
     TextField
-    TimePicker
-    Toggle
     Toolbar
-    ToolbarGroup
-    ToolbarSeparator
-    ToolbarTitle
+    Tooltip
+    TouchRipple
+    Typography
+    Zoom
     ])
 
 (defmacro generate-mui-el-fns [fname]
