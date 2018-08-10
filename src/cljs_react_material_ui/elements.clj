@@ -1,7 +1,5 @@
 (ns cljs-react-material-ui.elements
-  (:require [cljs-react-material-ui.core :as m])
-  (:import (javax.swing ButtonModel)
-           (java.lang.invoke SwitchPoint)))
+  (:require [cljs-react-material-ui.core :as m]))
 
 ; export (\w*) .*
 ; $1

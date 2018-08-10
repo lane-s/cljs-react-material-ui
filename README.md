@@ -2,7 +2,7 @@
 
 This library is interop to get [Material-UI](http://www.material-ui.com/#/) working in Clojurescript.
 
-Current Material-UI version: `0.19.0`
+Current Material-UI version: `1.4.0-0`
 
 ###### See Om.Next example app here 
 https://github.com/madvas/cljs-react-material-ui-example
@@ -18,9 +18,7 @@ Also don't forget to rename your `on-touch-tap` into `on-click`.
 Update your Clojurescript version (>= 1.9.908) 
 
 ## Installation
-- Add `[cljs-react-material-ui "0.2.48"]` to your dependencies
-- Add `[cljsjs/react "15.6.1-1"]` or newer version to your dependencies
-- Add `[cljsjs/react-dom "15.6.1-1"]` or newer version to your dependencies
+- Add `[cljs-react-material-ui "1.4.0-0"]` to your dependencies
 
 ## Usage
 
@@ -36,22 +34,18 @@ Update your Clojurescript version (>= 1.9.908)
 You must start your MaterialUI component tree with [ui/mui-theme-provider](http://www.material-ui.com/v0.15.0-beta.2/#/customization/themes), which must have exactly one direct child and defined theme. Use the same pattern when you want to change theme for some children, see example app.
 ```clojure
 (ui/mui-theme-provider
-    {:mui-theme (ui/get-mui-theme)}
+    {:theme (ui/get-mui-theme)}
     (ui/paper "Hello world"))
     
 (ui/mui-theme-provider 
     {:mui-theme (ui/get-mui-theme 
-        {:palette                   ; You can use either camelCase or kebab-case
-            {:primary1-color (ui/color :deep-orange-a100)} 
-         :raised-button 
-            {:primary-text-color (ui/color :light-black) 
-             :font-weight 200}})}
+        {:palette {}})}
     (ui/raised-button
         {:label   "Click me"
          :primary true}))
          
 (ui/mui-theme-provider
-    {:mui-theme (ui/get-mui-theme (aget js/MaterialUIStyles "DarkRawTheme"))}
+    {:theme (ui/get-mui-theme (aget js/MaterialUIStyles "DarkRawTheme"))}
     (ui/paper "Hello dark world"))
 ```
 
@@ -59,7 +53,7 @@ You can use all components (icons also) in their kebab-case form. Either with pr
 ```clojure
 (ui/radio-button
     {:value          "some_val"
-     :label          "Yes"
+     :children       "Yes"
      :class-name     "my-radio-class"
      :checked-icon   (ic/action-favorite)
      :unchecked-icon (ic/action-favorite-border)})
@@ -89,6 +83,7 @@ A simple Reagent example is as follows:
 (ns crmui-reagent.core
   (:require
     [cljsjs.material-ui]
+    [material-ui-icons]
     [cljs-react-material-ui.core :refer [get-mui-theme color]]
     [cljs-react-material-ui.reagent :as ui]
     [cljs-react-material-ui.icons :as ic]

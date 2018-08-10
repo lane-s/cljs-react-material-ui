@@ -1,10 +1,9 @@
 (ns cljs-react-material-ui.icons
   (:require-macros [cljs-react-material-ui.icons :as mi])
   (:require [cljs-react-material-ui.core :as m]
-            [cljsjs.material-ui-svg-icons]))
+            [material-ui-icons]))
 
-(def ^:private create-mui-icon (partial m/create-mui-cmp js/MaterialUISvgIcons))
-
+(def ^:private create-mui-icon (partial m/create-mui-cmp js/MaterialUIIcons))
 
 (defn action-accessibility [& args] (create-mui-icon "ActionAccessibility" args))
 (defn action-accessible [& args] (create-mui-icon "ActionAccessible" args))
