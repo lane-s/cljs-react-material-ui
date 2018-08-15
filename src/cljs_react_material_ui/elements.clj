@@ -10,7 +10,7 @@
     Backdrop
     Badge
     BottomNavigation
-    BottomNavigationItem
+    BottomNavigationAction
     Button
     ButtonBase
     Card
@@ -66,8 +66,11 @@
     MobileStepper
     Modal
     MuiThemeProvider
+    ModalManager
+    NativeSelect
     Paper
     Popover
+    Popper
     Portal
     Radio
     RadioGroup
@@ -78,6 +81,7 @@
     SnackbarContent
     Step
     StepButton
+    StepConnector
     StepContent
     StepIcon
     StepLabel
@@ -85,8 +89,6 @@
     SvgIcon
     SwipeableDrawer
     Switch
-    SwitchBase
-    Tab
     Table
     TableBody
     TableCell
@@ -96,11 +98,13 @@
     TableRow
     TableSortLabel
     Tabs
+    Tab
     TextField
     Toolbar
     Tooltip
-    TouchRipple
     Typography
+    withMobileDialog
+    withWidth
     Zoom
     ])
 
