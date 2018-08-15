@@ -9,4 +9,6 @@
                  [cljsjs/react-dom "15.6.1-1"]
                  [org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.908"]
-                 [sablono "0.8.0"]])
+                 [sablono "0.8.0"]
+                 [camel-snake-kebab "0.4.0"]
+                 ])
