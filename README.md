@@ -4,6 +4,8 @@ This library is interop to get [Material-UI](http://www.material-ui.com/#/) work
 
 Current Material-UI version: `1.4.0-0`
 
+## Warning: This readme is outdated. The library is usable, but will require you to read the source code
+
 ## Installation
 - Add `[cljs-react-material-ui "1.4.0-0"]` to your dependencies
 
