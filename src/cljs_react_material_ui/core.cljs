@@ -27,8 +27,11 @@
                  clj->js
                  js/MaterialUIStyles.createMuiTheme)))
 
-(defn color [color-key]
-  (aget js/MaterialUIStyles "colors" (name (camel-case color-key))))
+(defn color [color-name color-key]
+  (let [key-string (if (integer? color-key)
+                     (str color-key)
+                     (name (camel-case color-key)))]
+    (aget js/MaterialUIColors (name (camel-case color-name)) key-string)))
 
 (def make-selectable (aget js/MaterialUI "makeSelectable"))
 
