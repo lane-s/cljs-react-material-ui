@@ -4,19 +4,6 @@ This library is interop to get [Material-UI](http://www.material-ui.com/#/) work
 
 Current Material-UI version: `1.4.0-0`
 
-###### See Om.Next example app here 
-https://github.com/madvas/cljs-react-material-ui-example
-git
-
-## Warning version update >= 0.2.43
-When using [AutoComplete](http://www.material-ui.com/#/components/auto-complete) use props `:dataSource` and 
-`:dataSourceConfig` in camelCase form, since `data-` is interpreted as HTML data attribute
-
-## Warning version update >= 0.2.48
-Since this version you don't need to exclude `cljsjs/react` and `cljsjs/react-dom`. Material-ui bundle doesn't contain own React anymore.
-Also don't forget to rename your `on-touch-tap` into `on-click`. 
-Update your Clojurescript version (>= 1.9.908) 
-
 ## Installation
 - Add `[cljs-react-material-ui "1.4.0-0"]` to your dependencies
 

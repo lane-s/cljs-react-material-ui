@@ -27,7 +27,10 @@
                  clj->js
                  js/MaterialUIStyles.createMuiTheme)))
 
-(defn color [color-name color-key]
+(defn color
+  "Takes the color as a symbol for the first argument and then either
+  a number or a symbol for the second arg to specify the shade"
+  [color-name color-key]
   (let [key-string (if (integer? color-key)
                      (str color-key)
                      (name (camel-case color-key)))]
