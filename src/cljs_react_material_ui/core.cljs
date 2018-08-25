@@ -2,7 +2,8 @@
   (:refer-clojure :exclude [list stepper])
   (:require [cljsjs.material-ui]
             [clojure.walk :refer [postwalk]]
-            [sablono.util :refer [camel-case camel-case-keys]]))
+            [sablono.util :refer [camel-case camel-case-keys]]
+            [goog.object :as gobject]))
 
 (defn transform-keys [t coll]
   "Recursively transforms all map keys in coll with t."
@@ -18,7 +19,7 @@
      (apply js/React.createElement react-class
             (props-kebab->camel->js (first args)) (rest args))))
   ([root-obj type args]
-   (create-mui-cmp (aget root-obj type) args)))
+   (create-mui-cmp (gobject/getValueByKeys root-obj type) args)))
 
 (defn get-mui-theme
   ([] (get-mui-theme nil))
@@ -34,20 +35,20 @@
   (let [key-string (if (integer? color-key)
                      (str color-key)
                      (name (camel-case color-key)))]
-    (aget js/MaterialUIColors (name (camel-case color-name)) key-string)))
+    (getValueByKeys js/MaterialUIColors (name (camel-case color-name)) key-string)))
 
-(def make-selectable (aget js/MaterialUI "makeSelectable"))
+(def make-selectable (gobject/get js/MaterialUI "makeSelectable"))
 
 (def create-mui-el (partial create-mui-cmp js/MaterialUI))
 
-(defn selectable-list [& args] (create-mui-cmp (make-selectable (aget js/MaterialUI "List")) args))
+(defn selectable-list [& args] (create-mui-cmp (make-selectable (gobject/get js/MaterialUI "List")) args))
 
 (defn app-bar [& args] (create-mui-el "AppBar" args))
 (defn avatar [& args] (create-mui-el "Avatar" args))
 (defn backdrop [& args] (create-mui-el "Backdrop" args))
 (defn badge [& args] (create-mui-el "Badge" args))
 (defn bottom-navigation [& args] (create-mui-el "BottomNavigation" args))
-(defn bottom-navigation-item [& args] (create-mui-el "BottomNavigationItem" args))
+(defn bottom-navigation-action [& args] (create-mui-el "BottomNavigationAction" args))
 (defn button [& args] (create-mui-el "Button" args))
 (defn button-base [& args] (create-mui-el "ButtonBase" args))
 (defn card [& args] (create-mui-el "Card" args))
@@ -116,6 +117,7 @@
 (defn snackbar-content [& args] (create-mui-el "SnackbarContent" args))
 (defn step [& args] (create-mui-el "Step" args))
 (defn step-button [& args] (create-mui-el "StepButton" args))
+(defn step-connector [& args] (create-mui-el "StepConnector" args))
 (defn step-content [& args] (create-mui-el "StepContent" args))
 (defn step-icon [& args] (create-mui-el "StepIcon" args))
 (defn step-label [& args] (create-mui-el "StepLabel" args))
@@ -137,6 +139,6 @@
 (defn text-field [& args] (create-mui-el "TextField" args))
 (defn toolbar [& args] (create-mui-el "Toolbar" args))
 (defn tooltip [& args] (create-mui-el "Tooltip" args))
-(defn touch-rippler [& args] (create-mui-el "TouchRippler" args))
+(defn touch-ripple [& args] (create-mui-el "TouchRipple" args))
 (defn typography [& args] (create-mui-el "Typography" args))
 (defn zoom [& args] (create-mui-el "Zoom" args))
