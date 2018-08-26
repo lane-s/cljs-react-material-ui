@@ -1,10 +1,8 @@
 # cljs-react-material-ui
 
-This library is interop to get [Material-UI](http://www.material-ui.com/#/) working in Clojurescript.
+This library is interop to get [Material-UI](https://v1-4-0.material-ui.com/) working in Clojurescript.
 
 Current Material-UI version: `1.4.0-0`
-
-## Warning: This readme is outdated. The library is usable, but will require you to read the source code
 
 ## Installation
 - Add `[cljs-react-material-ui "1.4.0-0"]` to your dependencies
@@ -20,21 +18,21 @@ Current Material-UI version: `1.4.0-0`
                                                         ; Including icons is not required
   ```
 
-You must start your MaterialUI component tree with [ui/mui-theme-provider](http://www.material-ui.com/v0.15.0-beta.2/#/customization/themes), which must have exactly one direct child and defined theme. Use the same pattern when you want to change theme for some children, see example app.
+You must start your MaterialUI component tree with ui/mui-theme-provider, which must have exactly one direct child and defined theme. Use the same pattern when you want to change theme for some children, see example app.
 ```clojure
 (ui/mui-theme-provider
-    {:theme (ui/get-mui-theme)}
+    {:theme (ui/create-mui-theme)}
     (ui/paper "Hello world"))
     
 (ui/mui-theme-provider 
-    {:mui-theme (ui/get-mui-theme 
+    {:mui-theme (ui/create-mui-theme 
         {:palette {}})}
-    (ui/raised-button
+    (ui/button
         {:label   "Click me"
          :primary true}))
          
 (ui/mui-theme-provider
-    {:theme (ui/get-mui-theme (aget js/MaterialUIStyles "DarkRawTheme"))}
+    {:theme (ui/create-mui-theme (aget js/MaterialUIStyles "DarkRawTheme"))}
     (ui/paper "Hello dark world"))
 ```
 
@@ -59,6 +57,7 @@ js/MaterialUIStyles ; Contains everything from material-ui/src/styles/index.js
 js/MaterialUISvgIcons ; Contains constructors to all icons. Exists only when you
                       ; include icons in your code. No need to use directly.
 js/MaterialUIUtils ; Contains some of util functions provided by MaterialUI
+js/MaterialUIColors ; Contains all of the Material UI colors. Access using the `color` function.
 ```
 
 ##### Using with Reagent
@@ -69,35 +68,45 @@ Works with `reagent "0.6.0-alpha"` and up. So the dependency may be specified li
 A simple Reagent example is as follows:
 
 ```clojure
-(ns crmui-reagent.core
-  (:require
-    [cljsjs.material-ui]
-    [material-ui-icons]
-    [cljs-react-material-ui.core :refer [get-mui-theme color]]
-    [cljs-react-material-ui.reagent :as ui]
-    [cljs-react-material-ui.icons :as ic]
-    [reagent.core :as r]))
-    
-; Example with various components
-(defn home-page []
+(ns mui-reagent-example.app
+  (:require [reagent.core :as reagent :refer [atom]]
+            [cljsjs.material-ui]
+            [material-ui-icons]
+            [cljs-react-material-ui.core :refer [create-mui-theme color]]
+            [cljs-react-material-ui.reagent :as ui]
+            [cljs-react-material-ui.icons :as ic]))
+
+(defonce app-state (atom {:text "Material UI Example"}))
+
+(def base-theme
+  (create-mui-theme {:palette {:primary {:main (color :light-blue 700)}
+                            :secondary {:main (color :teal :A100)}
+                            :text-color (color :common :white)}}))
+
+(defn root []
   [ui/mui-theme-provider
-   {:mui-theme (get-mui-theme
-                 {:palette {:text-color (color :green600)}})}
-   [:div
-    [ui/app-bar {:title "Title"
-                  :icon-element-right
-                   (r/as-element [ui/icon-button
-                                    (ic/action-account-balance-wallet)])}]
-    [ui/paper
-     [:div "Hello"]
-     [ui/mui-theme-provider
-      {:mui-theme (get-mui-theme {:palette {:text-color (color :blue200)}})}
-      [ui/raised-button {:label "Blue button"}]]
-     (ic/action-home {:color (color :grey600)})
-     [ui/raised-button {:label        "Click me"
-                         :icon         (ic/social-group)
-                         :on-click     #(println "clicked")}]]]])
-    
+   {:theme base-theme}
+   [ui/css-baseline]
+   [ui/app-bar
+    {:position "static"}
+    [ui/toolbar
+     [ui/icon-button
+      {:color "inherit"
+       :style {:margin-left "-20px"
+               :margin-right "20px"}}
+      [ic/chevron-right]]
+     [ui/typography
+      {:variant "title"
+       :color "inherit"
+       :style {:flex-grow "1"}}
+      [@app-state :text]]
+     [:div
+      [ui/icon-button
+       {:color "inherit"}
+       [ic/account-circle]]]]]])
+
+(reagent/render-component [alt-root]
+                          (. js/document (getElementById "app")))
 ```
 &nbsp;
 ##### Using with Rum
@@ -105,7 +114,7 @@ A simple Reagent example is as follows:
 ```clojure
 (ns crmui-rum.core
   (:require
-    [cljs-react-material-ui.core :refer [get-mui-theme color]]
+    [cljs-react-material-ui.core :refer [create-mui-theme color]]
     [cljs-react-material-ui.icons :as ic]
     [cljs-react-material-ui.rum :as ui]
     [rum.core :as rum]))
@@ -116,7 +125,7 @@ A simple Reagent example is as follows:
 
 (defn home-page []
   (ui/mui-theme-provider
-    {:mui-theme (get-mui-theme)}
+    {:mui-theme (create-mui-theme)}
     [:div
      (ui/app-bar {:icon-element-right (ui/icon-button (ic/action-accessibility))})
      (ui/tabs
@@ -141,7 +150,8 @@ See example in reagent:
       [ui/selectable-list
        {:value @list-item-selected
         :on-change (fn [event value]
-                     (reset! list-item-selected value))}
+               
+      (reset! list-item-selected value))}
        [ui/subheader {} "Selectable Contacts"]
        [ui/list-item
         {:value 1

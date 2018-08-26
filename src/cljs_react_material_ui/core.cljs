@@ -21,8 +21,8 @@
   ([root-obj type args]
    (create-mui-cmp (gobject/getValueByKeys root-obj type) args)))
 
-(defn get-mui-theme
-  ([] (get-mui-theme nil))
+(defn create-mui-theme
+  ([] (create-mui-theme nil))
   ([raw-theme] (->> raw-theme
                  (transform-keys camel-case)
                  clj->js
@@ -35,7 +35,7 @@
   (let [key-string (if (integer? color-key)
                      (str color-key)
                      (name (camel-case color-key)))]
-    (getValueByKeys js/MaterialUIColors (name (camel-case color-name)) key-string)))
+    (gobject/getValueByKeys js/MaterialUIColors (name (camel-case color-name)) key-string)))
 
 (def make-selectable (gobject/get js/MaterialUI "makeSelectable"))
 

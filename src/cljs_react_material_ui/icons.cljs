@@ -1,4 +1,5 @@
 (ns cljs-react-material-ui.icons
+  (:refer-clojure :exclude [comment compare filter list loop map print remove repeat shuffle sort update])
   (:require-macros [cljs-react-material-ui.icons :as mi])
   (:require [reagent.core :as r]
             [cljs-react-material-ui.core :as m]
