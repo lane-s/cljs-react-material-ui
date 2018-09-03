@@ -1,6 +1,6 @@
-(defproject cljs-react-material-ui "1.4.0-0"
+(defproject org.clojars.melodylane/cljs-react-material-ui "1.4.0-0.1"
   :description "Iterop library for material-ui.com"
-  :url "https://github.com/madvas/cljs-react-material-ui"
+  :url "https://github.com/lane-s/cljs-react-material-ui"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[cljsjs/material-ui "1.4.0-0"]
@@ -11,4 +11,6 @@
                  [org.clojure/clojurescript "1.9.908"]
                  [sablono "0.8.0"]
                  [camel-snake-kebab "0.4.0"]
-                 ])
+                 ]
+   :deploy-repositories [["releases" :clojars]
+                         ["snapshots" :clojars]])

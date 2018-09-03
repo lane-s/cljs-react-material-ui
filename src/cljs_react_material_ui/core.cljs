@@ -28,6 +28,9 @@
                  clj->js
                  js/MaterialUIStyles.createMuiTheme)))
 
+(defn create-mui-transition [theme properties transitionParams]
+  (.create (gobject/get theme "transitions") (clj->js properties) (clj->js transitionParams)))
+
 (defn color
   "Takes the color as a symbol for the first argument and then either
   a number or a symbol for the second arg to specify the shade"
